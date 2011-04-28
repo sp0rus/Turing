@@ -1,0 +1,17 @@
+This program processes grades from the grades.txt file.
+
+The average grade was:
+The highest grade was:
+The lowest grade was:
+
+Number of A's (grades from 90-100):
+Number of B's (grades from 80-89):
+Number of C's (grades from 70-79):
+Number of D's (grades from 60-69):
+Number of F's (grades from 0-59):
+
+The number of invalid grades was:
+The number of valid grades was:
+The total number of grades processed was:
+
+End of file.  Exiting

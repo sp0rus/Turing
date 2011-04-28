@@ -1,0 +1,12 @@
+
+
+3  anaheim berlin chicago
+
+
+3
+anaheim berlin
+anaheim chicago
+chicago anaheim
+
+anaheim berlin
+chicago berlin
