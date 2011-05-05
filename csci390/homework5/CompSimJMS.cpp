@@ -149,20 +149,22 @@ void load( int * const memory )
 	while (instruction != SENTINEL)
 	{
 		// if the instruction is valid
-		if (  /*TODO*/ )
+		if (  validWord(instruction) )
 		{
-		        // assign the instruction to the memory[location]
-			    /*TODO*/
+		           // assign the instruction to the memory[location]
+			   memory[location]=instruction;
 			   // increment the index variable location
-			   /*TODO*/
+			   location++;
 		}
 		else
 		{
-		       // print error message "Number out of range. Please enter again.\n";
-		      /*TODO*/
+		           // print error message "Number out of range. Please enter again.\n";
+		           cout << "Number out of range. Please enter again.\n";
+		           cin >> instruction;
 		}
 		// prompt & read the next instruction
-		/*TODO*/
+		cout << "*** Please enter the next instruction. ***" << endl;
+		cin >> instruction;
 	}
 
 } // end load
@@ -172,40 +174,45 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			 int * const irPtr, int * const opCodePtr, int * const opPtr )
 {
 	// define a variable to be used as a flag for a fatal error
-	/*TODO*/
+	bool fatal;
 
 	// define an integer variable to be used as a temporary memory cell for certain
 	//    operations such as a READ
-	/*TODO*/
+	int temp;
 
 	// print an introductory message of STARTING SIMPLETRON EXECUTION
-	/*TODO*/
+	cout << "*** Program loading completed ***" << endl
+	     << "*** Program execution begins. ***" << endl;
 
 	// repeat this loop until a HALT is read or a fatal error occurs
 	do
 	{
 		// move the instruction from memory into the instruction register
-		*irPtr= /*TODO*/
+		*irPtr = memory[location]
 
 		// extract the op code portion of the instruction
-		*opCodePtr = /*TODO*/
+		*opCodePtr = irPtr/100;
 
 		// extract the operand portion
-		*opPtr = /*TODO*/
+		*opPtr = irPtr%100;
 
 		// run the op code through a switch to take appropriate action
 		switch ( *opCodePtr )
 		{
 			case READ:
 				// prompt & read an integer & store in variable temp
-				/*TODO*/
+				cout << "Enter an integer: ";
+				cin << temp;
+				cout << endl;
 				while (!validWord(temp) )
 				{
 					  // prompt & read again
-					  /*TODO*/
+					  cout << "Invalid integer, input again: ";
+					  cin << temp;
+					  cout << endl;
 				}
 				// store  temp into memory
-				memory[*opPtr] = /*TODO*/;
+				memory[*opPtr] = temp;
 
 				// increment the instruction counter
 				++(*icPtr);
@@ -213,141 +220,146 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 
 			case WRITE:
 				// output the contents of the operand location from *opPtr, and the operand from memory[*opPtr]
-				/*TODO*/
+				cout << opPtr; /*TODO*/
 				// increment the instruction counter
-				/*TODO*/
+				instructionCounter++;
         			break;
 
 			// case of LOAD instruction
-			/*TODO*/
+			case LOAD:
 				// store the operand from memory into the accumulator
 				*acPtr = /*TODO*/
 				// increment the instruction counter
-				/*TODO*/
+				instructionCounter++;
 			        break;
 
 		        // case of a STORE instruction
-		        /*TODO*/
+		        case STORE:
 				// store the accumulator into the operand's memory location. (Opposite of LOAD)
-				/*TODO*/
+				/*TODO*/ = *acPtr;
 				// increment the instruction counter
-				/*TODO*/
+				instructionCounter++;
 			        break;
 
 		        //case of ADD
+		        case ADD:
 				// add the accumulator to the operand in memory and store in temp
-				temp = memory[*opPtr] + /*TODO*/;
+				temp = memory[*opPtr] + accumulator;
 
 				// if the result in temp is valid
 				if (validWord(temp)
 				{
 					// store temp in accumulator
-					/*TODO*/
+					accumulator = temp;
 					// increment the instruction counter
-                                        /*TODO*/
+                                        instructionCounter++;
 				}
 				else
 				{
 					// print fatal error message of
 					// Accumulator overflow, Simpletron execution abnormally terminated
-					/*TODO*/
+					cout << "***            Accumulator overflow,           ***" << endl
+					     << "*** Simpletron execution abnormally terminated ***" << endl;
 					//set fatal flag to true
-					/*TODO*/
+					fatal = true;
 				}
 				        break;
 
-				//case of SUBTRACT
-				/*TODO*/
-					// subtract the operand in memory from the accumlator and store in temp
-					temp = /*TODO*/
-					// check to see if temp is a valid word
-					if (validWord(temp)
-					{
-						// store temp to the accumulator
-						/*TODO*/
-						// increment the instruction counter
-						/*TODO*/
-					}
-					else
-					{
-		        			//print fatal error message of Accumulator overflow
-						// and Simpletron execution abnormally terminated
-						/*TODO*/
-						//set fatal flag
-	    				        /*TODO*/
-					}
-				        break;
-
-				//case of DIVIDE
-			        /*TODO*/
-					// check if operand is 0
-					if ( memory[ *opPtr ] == 0 )
-					{
-						//print fatal error message of Attempt to divide by zero 
-		     			        // and Simpletron execution abnormally terminated
-					        /*TODO*/
-						// set fatal flag
-					        /*TODO*/
-					}
-					else
-					{
-						// divide the accumulator by the operand and store back into the accum.
-						*acPtr /= /*TODO*/   // OR *acPtr = *acPtr / /*TODO*/
-						// increment the instruction counter
-						/*TODO*/
-					}
-					break;
-
-				//case of MULTIPLY
-				/*TODO*/
-					// multiply the accumulator by the operand and store in temp
-					temp = /*TODO*/
-					// check to see if temp is valid
-					if (validWord(temp)
-					{
-						// store temp in the accumulator
-						*acPtr = /*TODO*/
-						// increment the instruction counter
-						/*TODO*/
-					}
-					else
-					{
-					        // print error message of Accumulator overflow
-						//  and Simpletron execution abnormally terminate
-						/*TODO*/
-						// set fatal flag
-						/*TODO*/
-					}
-					break;
-
-				case BRANCH:
-					*icPtr = *opPtr;
-					break;
-
-				case BRANCHNEG:
-					*acPtr < 0 ? *icPtr = *opPtr : ++( *icPtr );
-					break;
-
-				case BRANCHZERO:
-	       				*acPtr == 0 ? *icPtr = *opPtr : ++( *icPtr );
-					break;
-
-				case HALT:
-					// print message of Simpletron execution terminated
+			//case of SUBTRACT
+			case SUBTRACT:
+				// subtract the operand in memory from the accumlator and store in temp
+				temp = /*TODO*/
+				// check to see if temp is a valid word
+				if (validWord(temp)
+				{
+					// store temp to the accumulator
 					/*TODO*/
-					break;
+					// increment the instruction counter
+					instructionCounter++;
+				}
+				else
+				{
+		        		//print fatal error message of Accumulator overflow
+					// and Simpletron execution abnormally terminated
+				        cout << "***            Accumulator overflow,           ***" << endl
+					     << "*** Simpletron execution abnormally terminated ***" << endl;
+					//set fatal flag
+	    			        fatal = true;
+				}
+			        break;
 
-				default:
-			        	// print error message of Invalid Operand
-					/*TODO*/
+			//case of DIVIDE
+		        case DIVIDE:
+				// check if operand is 0
+				if ( memory[ *opPtr ] == 0 )
+				{
+					//print fatal error message of Attempt to divide by zero 
+	     			        // and Simpletron execution abnormally terminated
+				        cout << "***         Attempt to divide by zero,         ***" << endl
+					     << "*** Simpletron execution abnormally terminated ***" << endl;
 					// set fatal flag
-					/*TODO*/
-					break;
+				        fatal = true;
+				}
+				else
+				{
+					// divide the accumulator by the operand and store back into the accum.
+					*acPtr /= /*TODO*/   // OR *acPtr = *acPtr / /*TODO*/
+					// increment the instruction counter
+					instructionCounter++;
+				}
+				break;
+
+			//case of MULTIPLY
+			case MULTIPLY:
+				// multiply the accumulator by the operand and store in temp
+				temp = /*TODO*/
+				// check to see if temp is valid
+				if (validWord(temp)
+				{
+					// store temp in the accumulator
+					*acPtr = /*TODO*/
+					// increment the instruction counter
+					instructionCounter++;
+				}
+				else
+				{
+				        // print error message of Accumulator overflow
+					//  and Simpletron execution abnormally terminate
+					cout << "***            Accumulator overflow,           ***" << endl
+					     << "*** Simpletron execution abnormally terminated ***" << endl;
+					// set fatal flag
+					fatal = true;
+				}
+				break;
+
+			case BRANCH:
+				*icPtr = *opPtr;
+				break;
+
+			case BRANCHNEG:
+				*acPtr < 0 ? *icPtr = *opPtr : ++( *icPtr );
+				break;
+
+			case BRANCHZERO:
+       				*acPtr == 0 ? *icPtr = *opPtr : ++( *icPtr );
+				break;
+
+			case HALT:
+				// print message of Simpletron execution terminated
+				cout << "*** Simpletron execution terminated. ***" << endl;
+				break;
+
+			default:
+		        	// print error message of Invalid Operand
+				cout << "*** Invalid operation ***" << endl;
+				// set fatal flag
+				fatal = true;
+				break;
 		} // end switch
 
 	 } while ( *opCodePtr != HALT && !fatal );
         	// print conclusionary message of END SIMPLETRON EXECUTION
-	        /*TODO*/
+	        cout << "*** END SIMPLETRON EXECUTION ***" << endl;
 
 } // end function execute
 
@@ -368,13 +380,15 @@ void dump( const int * const memory, int accumulator,
 
 	 // print header
 	 for ( int i = 0; i <= 9; ++i )
+	 {
 		cout << setw( 5 ) << i << ' ';
-
+         }
 	 for ( int i = 0; i < SIZE; ++i )
 	 {
 		if ( i % 10 == 0 )
+		{
 			cout << '\n' << setw( 2 ) << i << ' ';
-
+                }
 		cout << internal << setw( 5 ) << setfill( '0' ) << memory[ i ] << ' ' << internal;
 	 } // end for
 
