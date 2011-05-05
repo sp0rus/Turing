@@ -191,10 +191,10 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 		*irPtr = memory[location]
 
 		// extract the op code portion of the instruction
-		*opCodePtr = irPtr/100;
+		*opCodePtr = *irPtr/100;
 
 		// extract the operand portion
-		*opPtr = irPtr%100;
+		*opPtr = *irPtr%100;
 
 		// run the op code through a switch to take appropriate action
 		switch ( *opCodePtr )
@@ -202,13 +202,13 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			case READ:
 				// prompt & read an integer & store in variable temp
 				cout << "Enter an integer: ";
-				cin << temp;
+				cin >> temp;
 				cout << endl;
 				while (!validWord(temp) )
 				{
 					  // prompt & read again
 					  cout << "Invalid integer, input again: ";
-					  cin << temp;
+					  cin >> temp;
 					  cout << endl;
 				}
 				// store  temp into memory
@@ -247,7 +247,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				temp = memory[*opPtr] + *acPtr;
 
 				// if the result in temp is valid
-				if (validWord(temp)
+				if (validWord(temp))
 				{
 					// store temp in accumulator
 					*acPtr = temp;
@@ -270,7 +270,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				// subtract the operand in memory from the accumlator and store in temp
 				temp = *acPtr - memory[*opPtr];
 				// check to see if temp is a valid word
-				if (validWord(temp)
+				if (validWord(temp))
 				{
 					// store temp to the accumulator
 					*acPtr = temp;
@@ -314,10 +314,10 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				// multiply the accumulator by the operand and store in temp
 				temp = *acPtr * *opPtr;
 				// check to see if temp is valid
-				if (validWord(temp)
+				if (validWord(temp))
 				{
 					// store temp in the accumulator
-					*acPtr = temp
+					*acPtr = temp;
 					// increment the instruction counter
 					instructionCounter++;
 				}
