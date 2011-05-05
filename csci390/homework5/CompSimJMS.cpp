@@ -190,221 +190,216 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 		switch ( *opCodePtr )
 		{
 			case READ:
-							// prompt & read an integer & store in variable temp
-							/*TODO*/
-							while (!validWord(temp) )
-							{
-								  // prompt & read again
-								  /*TODO*/
-							}
-							// store  temp into memory
-							memory[*opPtr] = /*TODO*/;
+				// prompt & read an integer & store in variable temp
+				/*TODO*/
+				while (!validWord(temp) )
+				{
+					  // prompt & read again
+					  /*TODO*/
+				}
+				// store  temp into memory
+				memory[*opPtr] = /*TODO*/;
 
-							// increment the instruction counter
-							++(*icPtr);
-			break;
+				// increment the instruction counter
+				++(*icPtr);
+			        break;
 
 			case WRITE:
-							// output the contents of the operand location from *opPtr, and the operand from memory[*opPtr]
-							/*TODO*/
-							// increment the instruction counter
-							/*TODO*/
-			break;
+				// output the contents of the operand location from *opPtr, and the operand from memory[*opPtr]
+				/*TODO*/
+				// increment the instruction counter
+				/*TODO*/
+        			break;
 
 			// case of LOAD instruction
 			/*TODO*/
-							// store the operand from memory into the accumulator
-							*acPtr = /*TODO*/
-							// increment the instruction counter
-							/*TODO*/
-			break;
+				// store the operand from memory into the accumulator
+				*acPtr = /*TODO*/
+				// increment the instruction counter
+				/*TODO*/
+			        break;
 
-		   // case of a STORE instruction
-		   /*TODO*/
-						// store the accumulator into the operand's memory location. (Opposite of LOAD)
-						/*TODO*/
-						// increment the instruction counter
-						/*TODO*/
-			break;
+		        // case of a STORE instruction
+		        /*TODO*/
+				// store the accumulator into the operand's memory location. (Opposite of LOAD)
+				/*TODO*/
+				// increment the instruction counter
+				/*TODO*/
+			        break;
 
-		   //case of ADD
-						// add the accumulator to the operand in memory and store in temp
-						temp = memory[*opPtr] + /*TODO*/;
+		        //case of ADD
+				// add the accumulator to the operand in memory and store in temp
+				temp = memory[*opPtr] + /*TODO*/;
 
-						// if the result in temp is valid
-						if (validWord(temp)
-							{
-									// store temp in accumulator
-									/*TODO*/
-									// increment the instruction counter
-									...
-							}
-						else
-							{
-									// print fatal error message of
-									// Accumulator overflow, Simpletron execution abnormally terminated
-									/*TODO*/
-									//set fatal flag to true
-									/*TODO*/
-							}
-				break;
+				// if the result in temp is valid
+				if (validWord(temp)
+				{
+					// store temp in accumulator
+					/*TODO*/
+					// increment the instruction counter
+                                        /*TODO*/
+				}
+				else
+				{
+					// print fatal error message of
+					// Accumulator overflow, Simpletron execution abnormally terminated
+					/*TODO*/
+					//set fatal flag to true
+					/*TODO*/
+				}
+				        break;
 
 				//case of SUBTRACT
 				/*TODO*/
-							// subtract the operand in memory from the accumlator and store in temp
-							temp = /*TODO*/
-							// check to see if temp is a valid word
-							if (validWord(temp)
-								{
-									// store temp to the accumulator
-									/*TODO*/
-									// increment the instruction counter
-									/*TODO*/
-								}
-							else
-								{
-									//print fatal error message of Accumulator overflow
-									// and Simpletron execution abnormally terminated
-									/*TODO*/
-									//set fatal flag
-								    /*TODO*/
-								}
-				break;
+					// subtract the operand in memory from the accumlator and store in temp
+					temp = /*TODO*/
+					// check to see if temp is a valid word
+					if (validWord(temp)
+					{
+						// store temp to the accumulator
+						/*TODO*/
+						// increment the instruction counter
+						/*TODO*/
+					}
+					else
+					{
+		        			//print fatal error message of Accumulator overflow
+						// and Simpletron execution abnormally terminated
+						/*TODO*/
+						//set fatal flag
+	    				        /*TODO*/
+					}
+				        break;
 
 				//case of DIVIDE
-			    /*TODO*/
-								// check if operand is 0
-								if ( memory[ *opPtr ] == 0 )
-								{
-										//print fatal error message of Attempt to divide by zero 
-									    // and Simpletron execution abnormally terminated
-									   /*TODO*/
-										// set fatal flag
-									   /*TODO*/
-								}
-								else
-								{
-										// divide the accumulator by the operand and store back into the accum.
-										*acPtr /= /*TODO*/   // OR *acPtr = *acPtr / /*TODO*/
-										// increment the instruction counter
-										/*TODO*/
-								}
+			        /*TODO*/
+					// check if operand is 0
+					if ( memory[ *opPtr ] == 0 )
+					{
+						//print fatal error message of Attempt to divide by zero 
+		     			        // and Simpletron execution abnormally terminated
+					        /*TODO*/
+						// set fatal flag
+					        /*TODO*/
+					}
+					else
+					{
+						// divide the accumulator by the operand and store back into the accum.
+						*acPtr /= /*TODO*/   // OR *acPtr = *acPtr / /*TODO*/
+						// increment the instruction counter
+						/*TODO*/
+					}
 					break;
 
-					//case of MULTIPLY
+				//case of MULTIPLY
+				/*TODO*/
+					// multiply the accumulator by the operand and store in temp
+					temp = /*TODO*/
+					// check to see if temp is valid
+					if (validWord(temp)
+					{
+						// store temp in the accumulator
+						*acPtr = /*TODO*/
+						// increment the instruction counter
+						/*TODO*/
+					}
+					else
+					{
+					        // print error message of Accumulator overflow
+						//  and Simpletron execution abnormally terminate
+						/*TODO*/
+						// set fatal flag
+						/*TODO*/
+					}
+					break;
+
+				case BRANCH:
+					*icPtr = *opPtr;
+					break;
+
+				case BRANCHNEG:
+					*acPtr < 0 ? *icPtr = *opPtr : ++( *icPtr );
+					break;
+
+				case BRANCHZERO:
+	       				*acPtr == 0 ? *icPtr = *opPtr : ++( *icPtr );
+					break;
+
+				case HALT:
+					// print message of Simpletron execution terminated
 					/*TODO*/
-								// multiply the accumulator by the operand and store in temp
-								temp = /*TODO*/
-								// check to see if temp is valid
-								if (validWord(temp)
-									{
-										// store temp in the accumulator
-										*acPtr = /*TODO*/
-										// increment the instruction counter
-										/*TODO*/
-									}
-								else
-								{
-									// print error message of Accumulator overflow
-									//  and Simpletron execution abnormally terminate
-									/*TODO*/
-									// set fatal flag
-									/*TODO*/
-								}
 					break;
 
-					case BRANCH:
-									*icPtr = *opPtr;
+				default:
+			        	// print error message of Invalid Operand
+					/*TODO*/
+					// set fatal flag
+					/*TODO*/
 					break;
-
-					case BRANCHNEG:
-									*acPtr < 0 ? *icPtr = *opPtr : ++( *icPtr );
-					break;
-
-					case BRANCHZERO:
-									*acPtr == 0 ? *icPtr = *opPtr : ++( *icPtr );
-					break;
-
-					case HALT:
-									// print message of Simpletron execution terminated
-									/*TODO*/
-					break;
-
-					default:
-									// print error message of Invalid Operand
-									/*TODO*/
-									// set fatal flag
-									/*TODO*/
-					break;
-		  } // end switch
+		} // end switch
 
 	 } while ( *opCodePtr != HALT && !fatal );
-
-		// print conclusionary message of END SIMPLETRON EXECUTION
-	    /*TODO*/
+        	// print conclusionary message of END SIMPLETRON EXECUTION
+	        /*TODO*/
 
 } // end function execute
 
 // prints out name and contents of each register and memory
 void dump( const int * const memory, int accumulator,
-		  int instructionCounter, int instructionRegister, int operationCode,
-		  int operand )
+		  int instructionCounter, int instructionRegister, 
+		  int operationCode, int operand )
 {
-	cout << "\nREGISTERS:\n";
-	output( "accumulator", 5, accumulator, true );
-	output( "instructionCounter", 2, instructionCounter, false );
-	output( "instructionRegister", 5, instructionRegister, true );
-	output( "operationCode", 2, operationCode, false );
-	output( "operand", 2, operand, false );
-	cout << "\n\nMEMORY:\n";
+	 cout << "\nREGISTERS:\n";
+ 	 output( "accumulator", 5, accumulator, true );
+	 output( "instructionCounter", 2, instructionCounter, false );
+	 output( "instructionRegister", 5, instructionRegister, true );
+	 output( "operationCode", 2, operationCode, false );
+	 output( "operand", 2, operand, false );
+	 cout << "\n\nMEMORY:\n";
 
-	cout << setfill( ' ' ) << setw( 3 ) << ' ';
+	 cout << setfill( ' ' ) << setw( 3 ) << ' ';
 
-	// print header
-	for ( int i = 0; i <= 9; ++i )
+	 // print header
+	 for ( int i = 0; i <= 9; ++i )
 		cout << setw( 5 ) << i << ' ';
 
-	for ( int i = 0; i < SIZE; ++i )
-	{
+	 for ( int i = 0; i < SIZE; ++i )
+	 {
 		if ( i % 10 == 0 )
 			cout << '\n' << setw( 2 ) << i << ' ';
 
-		cout << internal << setw( 5 ) << setfill( '0' )
-		<< memory[ i ] << ' ' << internal;
-	} // end for
+		cout << internal << setw( 5 ) << setfill( '0' ) << memory[ i ] << ' ' << internal;
+	 } // end for
 
-	cout << endl;
+	 cout << endl;
 } // end function dump
 
 // validate instruction
 bool validWord( int word )
 {
-	return word >= MIN_WORD && word <= MAX_WORD;
+	 return word >= MIN_WORD && word <= MAX_WORD;
 } // end function validWord
 
 // display result
 void output( string label, int width, int value, bool sign )
 {
-	// format of "accumulator", etc.
-	cout << setfill( ' ' ) << left << setw( 20 )
-        << label << ' ';
+	 // format of "accumulator", etc.
+	 cout << setfill( ' ' ) << left << setw( 20 ) << label << ' ';
 
-	// is a +/- sign needed?
-	if ( sign )
+	 // is a +/- sign needed?
+	 if ( sign )
 		cout << showpos << internal;
 
-	// setup for displaying accumulator value, etc.
-	cout << left << setfill( '0' );
+	 // setup for displaying accumulator value, etc.
+	 cout << left << setfill( '0' );
 
-	// determine the field widths and display value
-	if ( width == 5 )
+	 // determine the field widths and display value
+	 if ( width == 5 )
 		cout << setw( width ) << value << '\n';
-	else  // width is 2
-		cout << setfill( ' ' ) << setw( 3 ) << ' ' << setw( width )
-		<< setfill( '0' ) << value << '\n';
+	 else  // width is 2
+		cout << setfill( ' ' ) << setw( 3 ) << ' ' << setw( width ) << setfill( '0' ) << value << '\n';
 
-	// disable sign if it was set
-	if ( sign )
+	 // disable sign if it was set
+	 if ( sign )
 		cout << showpos << internal;
 } // end function output
-
