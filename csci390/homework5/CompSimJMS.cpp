@@ -174,7 +174,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			 int * const irPtr, int * const opCodePtr, int * const opPtr )
 {
 	// define a variable to be used as a flag for a fatal error
-	bool fatal;
+	bool fatal = false;
 
 	// define an integer variable to be used as a temporary memory cell for certain
 	//    operations such as a READ
@@ -220,7 +220,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 
 			case WRITE:
 				// output the contents of the operand location from *opPtr, and the operand from memory[*opPtr]
-				cout << opPtr; /*TODO*/
+				cout << *opPtr << memory[*opPtr];
 				// increment the instruction counter
 				instructionCounter++;
         			break;
@@ -228,7 +228,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			// case of LOAD instruction
 			case LOAD:
 				// store the operand from memory into the accumulator
-				*acPtr = /*TODO*/
+				*acPtr = memory[*opPtr];
 				// increment the instruction counter
 				instructionCounter++;
 			        break;
@@ -236,7 +236,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 		        // case of a STORE instruction
 		        case STORE:
 				// store the accumulator into the operand's memory location. (Opposite of LOAD)
-				/*TODO*/ = *acPtr;
+				memory[*opPtr] = *acPtr;
 				// increment the instruction counter
 				instructionCounter++;
 			        break;
@@ -244,13 +244,13 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 		        //case of ADD
 		        case ADD:
 				// add the accumulator to the operand in memory and store in temp
-				temp = memory[*opPtr] + accumulator;
+				temp = memory[*opPtr] + *acPtr;
 
 				// if the result in temp is valid
 				if (validWord(temp)
 				{
 					// store temp in accumulator
-					accumulator = temp;
+					*acPtr = temp;
 					// increment the instruction counter
                                         instructionCounter++;
 				}
@@ -268,12 +268,12 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			//case of SUBTRACT
 			case SUBTRACT:
 				// subtract the operand in memory from the accumlator and store in temp
-				temp = /*TODO*/
+				temp = *acPtr - memory[*opPtr];
 				// check to see if temp is a valid word
 				if (validWord(temp)
 				{
 					// store temp to the accumulator
-					/*TODO*/
+					*acPtr = temp;
 					// increment the instruction counter
 					instructionCounter++;
 				}
@@ -303,7 +303,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				else
 				{
 					// divide the accumulator by the operand and store back into the accum.
-					*acPtr /= /*TODO*/   // OR *acPtr = *acPtr / /*TODO*/
+					*acPtr /= *opPtr;   // OR *acPtr = *acPtr /
 					// increment the instruction counter
 					instructionCounter++;
 				}
@@ -312,12 +312,12 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			//case of MULTIPLY
 			case MULTIPLY:
 				// multiply the accumulator by the operand and store in temp
-				temp = /*TODO*/
+				temp = *acPtr * *opPtr;
 				// check to see if temp is valid
 				if (validWord(temp)
 				{
 					// store temp in the accumulator
-					*acPtr = /*TODO*/
+					*acPtr = temp
 					// increment the instruction counter
 					instructionCounter++;
 				}
