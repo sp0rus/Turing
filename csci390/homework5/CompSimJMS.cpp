@@ -143,6 +143,9 @@ void load( int * const memory )
 	             << "*** You then type the word for that location. ***" << endl
 	             << "*** Type the sentinal -99999 to stop entering ***" << endl
 	             << "*** your program.                             ***" << endl;
+	        if (location < 10)
+	                cout << "0";
+	        cout << location << " ? ";
 	        cin >> instruction;
 
 	// repeat while the instruction entered is not the sentinel value
@@ -163,7 +166,9 @@ void load( int * const memory )
 		           cin >> instruction;
 		}
 		// prompt & read the next instruction
-		cout << "*** Please enter the next instruction. ***" << endl;
+		if (location < 10)
+	                cout << "0";
+	        cout << location << " ? ";
 		cin >> instruction;
 	}
 
@@ -181,14 +186,13 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 	int temp;
 
 	// print an introductory message of STARTING SIMPLETRON EXECUTION
-	cout << "*** Program loading completed ***" << endl
-	     << "*** Program execution begins. ***" << endl;
+	cout << "*** Start Simpletron Execution ***" << endl;
 
 	// repeat this loop until a HALT is read or a fatal error occurs
 	do
 	{
 		// move the instruction from memory into the instruction register
-		*irPtr = memory[location]
+		*irPtr = memory[*icPtr];
 
 		// extract the op code portion of the instruction
 		*opCodePtr = *irPtr/100;
@@ -203,7 +207,6 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				// prompt & read an integer & store in variable temp
 				cout << "Enter an integer: ";
 				cin >> temp;
-				cout << endl;
 				while (!validWord(temp) )
 				{
 					  // prompt & read again
@@ -220,9 +223,9 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 
 			case WRITE:
 				// output the contents of the operand location from *opPtr, and the operand from memory[*opPtr]
-				cout << *opPtr << memory[*opPtr];
+				cout << "Contents of " << *opPtr << ": " << memory[*opPtr] << endl;
 				// increment the instruction counter
-				instructionCounter++;
+				++(*icPtr);
         			break;
 
 			// case of LOAD instruction
@@ -230,7 +233,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				// store the operand from memory into the accumulator
 				*acPtr = memory[*opPtr];
 				// increment the instruction counter
-				instructionCounter++;
+				++(*icPtr);
 			        break;
 
 		        // case of a STORE instruction
@@ -238,7 +241,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 				// store the accumulator into the operand's memory location. (Opposite of LOAD)
 				memory[*opPtr] = *acPtr;
 				// increment the instruction counter
-				instructionCounter++;
+				++(*icPtr);
 			        break;
 
 		        //case of ADD
@@ -252,7 +255,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 					// store temp in accumulator
 					*acPtr = temp;
 					// increment the instruction counter
-                                        instructionCounter++;
+                                        ++(*icPtr);
 				}
 				else
 				{
@@ -275,7 +278,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 					// store temp to the accumulator
 					*acPtr = temp;
 					// increment the instruction counter
-					instructionCounter++;
+					++(*icPtr);
 				}
 				else
 				{
@@ -305,7 +308,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 					// divide the accumulator by the operand and store back into the accum.
 					*acPtr /= *opPtr;   // OR *acPtr = *acPtr /
 					// increment the instruction counter
-					instructionCounter++;
+					++(*icPtr);
 				}
 				break;
 
@@ -319,7 +322,7 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 					// store temp in the accumulator
 					*acPtr = temp;
 					// increment the instruction counter
-					instructionCounter++;
+					++(*icPtr);
 				}
 				else
 				{
