@@ -136,7 +136,14 @@ void load( int * const memory )
 
 	// print introductory message "Welcome to Simpletron" , etc
 	// prompt & read first instruction
-	    /*TODO*/
+	        cout << "***           Welcome to Simpletron           ***" << endl
+	             << "*** Please enter your program one instruction ***" << endl
+	             << "*** (or data word) at a time. I will type the ***" << endl
+	             << "*** location number and a question mark (?).  ***" << endl
+	             << "*** You then type the word for that location. ***" << endl
+	             << "*** Type the sentinal -99999 to stop entering ***" << endl
+	             << "*** your program.                             ***" << endl;
+	        cin >> instruction;
 
 	// repeat while the instruction entered is not the sentinel value
 	while (instruction != SENTINEL)
