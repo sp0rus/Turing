@@ -1,4 +1,18 @@
 /*
+     Name: John Stitt
+     Email: jmstitt@olemiss.edu
+     Program Source File Name: CompSimJMS.cpp
+     Current Date: May 4, 2011
+     Course Information: CSCI 390 - Section 1
+     Instructor: Ms. C. B. Zickos
+     Program Description: Program is a software simulation of the "Simpletron" computer.
+    
+     Honor Code Statement: In keeping with the honor code policies of the University of Mississippi, the School of Engineering,      and the Department of Computer and Information Science, I affirm that I have neither given nor received assistance on this      programming assignment. This assignment represents my individual, original effort.
+                    ... My Signature is on File.
+*/ 
+
+
+/*
  *  CompSim.cpp
  *
  * Starter code for EX08_19.cpp
@@ -15,7 +29,7 @@
 // you use the prototypes exactly as given in this code.
 
 
-#include < iostream>
+#include <iostream>
 #include <iomanip>
 #include <string>
 using namespace std;
@@ -122,26 +136,26 @@ void load( int * const memory )
 
 	// print introductory message "Welcome to Simpletron" , etc
 	// prompt & read first instruction
-	    ....
+	    /*TODO*/
 
 	// repeat while the instruction entered is not the sentinel value
 	while (instruction != SENTINEL)
 	{
 		// if the instruction is valid
-		if (  ... )
+		if (  /*TODO*/ )
 		{
 		        // assign the instruction to the memory[location]
-			    ....
+			    /*TODO*/
 			   // increment the index variable location
-			   ....
+			   /*TODO*/
 		}
 		else
 		{
 		       // print error message "Number out of range. Please enter again.\n";
-		      ......
+		      /*TODO*/
 		}
 		// prompt & read the next instruction
-		.......
+		/*TODO*/
 	}
 
 } // end load
@@ -151,40 +165,40 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 			 int * const irPtr, int * const opCodePtr, int * const opPtr )
 {
 	// define a variable to be used as a flag for a fatal error
-	....
+	/*TODO*/
 
 	// define an integer variable to be used as a temporary memory cell for certain
 	//    operations such as a READ
-	.....
+	/*TODO*/
 
 	// print an introductory message of STARTING SIMPLETRON EXECUTION
-	....
+	/*TODO*/
 
 	// repeat this loop until a HALT is read or a fatal error occurs
 	do
 	{
 		// move the instruction from memory into the instruction register
-		*irPtr= .....
+		*irPtr= /*TODO*/
 
 		// extract the op code portion of the instruction
-		*opCodePtr = ....
+		*opCodePtr = /*TODO*/
 
 		// extract the operand portion
-		*opPtr = ....
+		*opPtr = /*TODO*/
 
 		// run the op code through a switch to take appropriate action
 		switch ( *opCodePtr )
 		{
 			case READ:
 							// prompt & read an integer & store in variable temp
-							......
+							/*TODO*/
 							while (!validWord(temp) )
 							{
 								  // prompt & read again
-								  .....
+								  /*TODO*/
 							}
 							// store  temp into memory
-							memory[*opPtr] = .......;
+							memory[*opPtr] = /*TODO*/;
 
 							// increment the instruction counter
 							++(*icPtr);
@@ -192,36 +206,36 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 
 			case WRITE:
 							// output the contents of the operand location from *opPtr, and the operand from memory[*opPtr]
-							......
+							/*TODO*/
 							// increment the instruction counter
-							......
+							/*TODO*/
 			break;
 
 			// case of LOAD instruction
-			.....
+			/*TODO*/
 							// store the operand from memory into the accumulator
-							*acPtr = .....
+							*acPtr = /*TODO*/
 							// increment the instruction counter
-							.....
+							/*TODO*/
 			break;
 
 		   // case of a STORE instruction
-		   ...
+		   /*TODO*/
 						// store the accumulator into the operand's memory location. (Opposite of LOAD)
-						.....
+						/*TODO*/
 						// increment the instruction counter
-						.....
+						/*TODO*/
 			break;
 
 		   //case of ADD
 						// add the accumulator to the operand in memory and store in temp
-						temp = memory[*opPtr] + ..........;
+						temp = memory[*opPtr] + /*TODO*/;
 
 						// if the result in temp is valid
 						if (validWord(temp)
 							{
 									// store temp in accumulator
-									.....
+									/*TODO*/
 									// increment the instruction counter
 									...
 							}
@@ -229,73 +243,73 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 							{
 									// print fatal error message of
 									// Accumulator overflow, Simpletron execution abnormally terminated
-									.....
+									/*TODO*/
 									//set fatal flag to true
-									...
+									/*TODO*/
 							}
 				break;
 
 				//case of SUBTRACT
-				...
+				/*TODO*/
 							// subtract the operand in memory from the accumlator and store in temp
-							temp = ....
+							temp = /*TODO*/
 							// check to see if temp is a valid word
 							if (validWord(temp)
 								{
 									// store temp to the accumulator
-									....
+									/*TODO*/
 									// increment the instruction counter
-									....
+									/*TODO*/
 								}
 							else
 								{
 									//print fatal error message of Accumulator overflow
 									// and Simpletron execution abnormally terminated
-									.....
+									/*TODO*/
 									//set fatal flag
-								    ....
+								    /*TODO*/
 								}
 				break;
 
 				//case of DIVIDE
-			    ....
+			    /*TODO*/
 								// check if operand is 0
 								if ( memory[ *opPtr ] == 0 )
 								{
 										//print fatal error message of Attempt to divide by zero 
 									    // and Simpletron execution abnormally terminated
-									   ....
+									   /*TODO*/
 										// set fatal flag
-									   ....
+									   /*TODO*/
 								}
 								else
 								{
 										// divide the accumulator by the operand and store back into the accum.
-										*acPtr /= ....   // OR *acPtr = *acPtr / ....
+										*acPtr /= /*TODO*/   // OR *acPtr = *acPtr / /*TODO*/
 										// increment the instruction counter
-										....
+										/*TODO*/
 								}
 					break;
 
 					//case of MULTIPLY
-					....
+					/*TODO*/
 								// multiply the accumulator by the operand and store in temp
-								temp = .....
+								temp = /*TODO*/
 								// check to see if temp is valid
 								if (validWord(temp)
 									{
 										// store temp in the accumulator
-										*acPtr = .....
+										*acPtr = /*TODO*/
 										// increment the instruction counter
-										...
+										/*TODO*/
 									}
 								else
 								{
 									// print error message of Accumulator overflow
 									//  and Simpletron execution abnormally terminate
-									....
+									/*TODO*/
 									// set fatal flag
-									...
+									/*TODO*/
 								}
 					break;
 
@@ -313,21 +327,21 @@ void execute( int * const memory, int * const acPtr, int * const icPtr,
 
 					case HALT:
 									// print message of Simpletron execution terminated
-									.....
+									/*TODO*/
 					break;
 
 					default:
 									// print error message of Invalid Operand
-									....
+									/*TODO*/
 									// set fatal flag
-									....
+									/*TODO*/
 					break;
 		  } // end switch
 
 	 } while ( *opCodePtr != HALT && !fatal );
 
 		// print conclusionary message of END SIMPLETRON EXECUTION
-	    ....
+	    /*TODO*/
 
 } // end function execute
 
